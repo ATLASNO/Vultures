@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Compte à rebours</title>
+  <link rel="stylesheet" type="text/css" href="/home/atlas/Téléchargements/Marriage.ttf">
+
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: marriage, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    #countdown {
+      font-size: 5em;
+      margin-top: 20vh;
+    }
+  </style>
+</head>
+<body>
+  <div id="countdown"></div>
+
+  <script>
+    // Calcul du temps restant jusqu'au 15 janvier
+    const countDownDate = new Date('2023-01-15T00:00:00Z').getTime();
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById('countdown').innerHTML = `${days}j ${hours}h ${minutes}m ${seconds}s`;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById('countdown').innerHTML = 'EXPIRÉ';
+      }
+    };
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
